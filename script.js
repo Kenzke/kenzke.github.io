@@ -4,6 +4,8 @@ var curr = document.getElementById("curr");
 var ele = document.getElementById("cont");
 var left = document.getElementById("topl_id");
 var right = document.getElementById("topr_id");
+
+
 //index of number of pages to cycle thru
 var numberOfPages=8;
 
@@ -35,6 +37,8 @@ drop.onclick = function() {
     }
 };
 
+
+//page cycler
 right.onclick = function(){
     if(pagenumber>=numberOfPages){
         location.href = "index.html";
@@ -45,9 +49,11 @@ right.onclick = function(){
 }
 left.onclick = function(){
     if(pagenumber==1){
-        window.open(numberOfPages+".html");
+        location.href = numberOfPages+".html";
+    }else if(pagenumber==2){
+        location.href = "index.html";
     }else{
         var pagenumberminusone = pagenumber -1;
-        window.open(pagenumberminusone+".html");
+        location.href = pagenumberminusone+".html";
     }
 }

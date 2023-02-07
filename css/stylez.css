@@ -475,6 +475,16 @@ html, body{
 
 }
 
+.form{
+    max-width:100%; 
+    height: auto;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+    margin-bottom:10px;
+    align-self: center;
+}
+
 
 #mainnumber{
     font-size: 70px;
@@ -527,6 +537,7 @@ span {
     padding:0px;
     width:50%;
 }
+
 
   
 @keyframes caret {
