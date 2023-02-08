@@ -15,7 +15,6 @@ var page = path.split("/").pop();
 
 var pagestring = page.split(".")[0];
 
-
 if(pagestring=="index"){
     pagestring="1";
 }
