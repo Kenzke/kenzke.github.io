@@ -20,6 +20,7 @@ if(pagestring=="index"){
 }
 
 var pagenumber = parseInt(pagestring, 10);
+console.log(pagenumber);
 
 ele.onclick = function() {
     curr.style.display="block";
@@ -43,16 +44,16 @@ right.onclick = function(){
         location.href = "index.html";
     }else{
         var pagenumberplusone = pagenumber + 1;
-        location.href = pagenumberplusone+".html";
+        location.href = pagenumberplusone.toString()+".html";
     }
 }
 left.onclick = function(){
     if(pagenumber==1){
-        location.href = numberOfPages+".html";
+        location.href = numberOfPages.toString()+".html";
     }else if(pagenumber==2){
         location.href = "index.html";
     }else{
         var pagenumberminusone = pagenumber -1;
-        location.href = pagenumberminusone+".html";
+        location.href = pagenumberminusone.toString()+".html";
     }
 }
