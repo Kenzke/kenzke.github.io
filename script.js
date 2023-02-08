@@ -10,6 +10,7 @@ var right = document.getElementById("topr_id");
 var numberOfPages=8;
 
 var path = window.location.pathname;
+console.log(window.location.pathname);
 
 var page = path.split("/").pop();
 
