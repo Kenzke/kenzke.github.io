@@ -20,7 +20,6 @@ if(pagestring=="index"){
 }
 
 var pagenumber = parseInt(pagestring, 10);
-console.log(pagenumber);
 
 ele.onclick = function() {
     curr.style.display="block";
