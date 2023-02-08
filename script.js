@@ -43,16 +43,22 @@ right.onclick = function(){
         location.href = "index.html";
     }else{
         var pagenumberplusone = pagenumber + 1;
-        location.href = pagenumberplusone.toString()+".html";
+        var fulllocation = pagenumberplusone.toString()+".html"
+        location.href = fulllocation;
+        console.log(fulllocation + " " + (typeof fulllocation));
     }
 }
 left.onclick = function(){
     if(pagenumber==1){
-        location.href = numberOfPages.toString()+".html";
+        var fulllocation = numberOfPages.toString()+".html";
+        location.href = fulllocation;
+        console.log(fulllocation + " " + (typeof fulllocation));
     }else if(pagenumber==2){
         location.href = "index.html";
     }else{
         var pagenumberminusone = pagenumber -1;
-        location.href = pagenumberminusone.toString()+".html";
+        var fulllocation = pagenumberminusone.toString() + ".html";
+        location.href = fulllocation;
+        console.log(fulllocation + " " + (typeof fulllocation));
     }
 }
