@@ -475,14 +475,10 @@ html, body{
 
 }
 
-.form{
-    max-width:100%; 
-    height: auto;
-    margin-left:auto;
-    margin-right:auto;
-    display:block;
-    margin-bottom:10px;
-    align-self: center;
+.fname{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 
@@ -537,7 +533,12 @@ span {
     padding:0px;
     width:50%;
 }
-
+.semanticWeb{
+    position: absolute;
+    top: 50%;
+   left: 50%;
+   color:red;
+}
 
   
 @keyframes caret {

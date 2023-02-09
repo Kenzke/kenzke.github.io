@@ -4,7 +4,8 @@ var curr = document.getElementById("curr");
 var ele = document.getElementById("cont");
 var left = document.getElementById("topl_id");
 var right = document.getElementById("topr_id");
-
+var semanticWeb = document.getElementById("semanticWeb");
+var impressions = [];
 
 //index of number of pages to cycle thru
 var numberOfPages=8;
@@ -62,4 +63,12 @@ left.onclick = function(){
         location.href = fulllocation;
         console.log(fulllocation + " " + (typeof fulllocation));
     }
+}
+
+function pushImpression(){
+    var impression = document.getElementById("impression1").value;
+    impressions.push(impression);
+    console.log(impressions);
+    semanticWeb.innerHTML = impressions.toString();
+    return false;
 }
