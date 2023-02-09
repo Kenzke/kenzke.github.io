@@ -7,6 +7,8 @@ var right = document.getElementById("topr_id");
 var semanticWeb = document.getElementById("semanticWeb");
 var impressions = [];
 
+
+
 //index of number of pages to cycle thru
 var numberOfPages=8;
 
@@ -22,6 +24,8 @@ if(pagestring=="index"){
 }
 
 var pagenumber = parseInt(pagestring, 10);
+
+if (!pagenumber) pagenumber = 1;
 
 ele.onclick = function() {
     curr.style.display="block";
