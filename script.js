@@ -6,9 +6,12 @@ var left = document.getElementById("topl_id");
 var right = document.getElementById("topr_id");
 var semanticWeb = document.getElementById("semanticWeb");
 var impressions = [];
+var impressions_html = [];
+var impressions_pos = [];
+var Impression_Counter = 0;
 
 
-var MY_TOKEN= "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";
+var MY_TOKEN= "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";
 
 
 
@@ -72,16 +75,52 @@ left.onclick = function(){
     }
 }
 
+let model = new TSNE({
+  dim: 2,
+  perplexity: 30.0,
+  earlyExaggeration: 4.0,
+  learningRate: 100.0,
+  nIter: 1000,
+  metric: 'euclidean'
+});
+
+//https://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf?fbcl
+//https://github.com/scienceai/tsne-js
 function pushImpression(){
     var impression = document.getElementById("impression1").value;
+    impressions.push(impression);
+    Impression_Counter++;
+
     var logits = OpenaiFetchAPI(impression);
-    console.log("impressioninternal:"+logits[0]);
-    var x=Math.floor(Math.random() * 101);
-    var y=Math.floor(Math.random() * 101);
-    impressionh = "<div class=\"semance\" style=\"position: absolute;top:"+x+"%;left: "+y+"%;color:red;\">" + impression + "</div>";
-    impressions.push(impressionh);
-    console.log(impressions);
-    semanticWeb.innerHTML = impressions.toString();
+    var x=50;
+    var y=50;
+    var prev_x=0;
+    var prev_y=0;
+
+    if(Impression_Counter<2){
+        
+    }else{
+        var i = Impression_Counter-2;
+        var prev_x=(impressions_pos[i][0]*1000)+50;
+        var prev_y=(impressions_pos[i][1]*1000)+50;
+    }
+
+    console.log("x: "+x+",y: "+y);
+    console.log("prev_x: "+prev_x+",prev_y: "+prev_y);
+
+
+    var curr_impression_html = "<div class=\"semance\" style=\"position: absolute;top:"+x+"%;left: "+y+"%;color:red;\">" + impression + "</div>";
+    if(Impression_Counter>1){
+        impressions_html[Impression_Counter-2]="<div class=\"semance\" style=\"position: absolute;top:"+prev_x+"%;left: "+prev_y+"%;color:red;\">" + impressions[impressions.length-2] + "</div>";
+    }
+    impressions_html.push(curr_impression_html);
+
+    console.log("impression_Counter: "+Impression_Counter);
+    console.log("impressions: "+impressions);
+    console.log("impressions_html: "+impressions_html);
+    console.log("impressions_pos: "+impressions_pos);
+
+    semanticWeb.innerHTML = impressions_html.toString();
     return false;
 }
 
@@ -104,6 +143,7 @@ async function OpenaiFetchAPI(in1) {
     })
     var datav1  = await response.json();
     console.log(datav1.data[0].embedding)
+    impressions_pos.push(datav1.data[0].embedding);
     return datav1.data[0].embedding;
 }
 
