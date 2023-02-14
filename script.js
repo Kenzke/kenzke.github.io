@@ -8,9 +8,12 @@ var semanticWeb = document.getElementById("semanticWeb");
 var impressions = [];
 
 
+var MY_TOKEN= "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";
+
+
 
 //index of number of pages to cycle thru
-var numberOfPages=8;
+var numberOfPages=7;
 
 var path = window.location.pathname;
 console.log(path);
@@ -71,8 +74,64 @@ left.onclick = function(){
 
 function pushImpression(){
     var impression = document.getElementById("impression1").value;
-    impressions.push(impression);
+    var logits = OpenaiFetchAPI(impression);
+    console.log("impressioninternal:"+logits[0]);
+    var x=Math.floor(Math.random() * 101);
+    var y=Math.floor(Math.random() * 101);
+    impressionh = "<div class=\"semance\" style=\"position: absolute;top:"+x+"%;left: "+y+"%;color:red;\">" + impression + "</div>";
+    impressions.push(impressionh);
     console.log(impressions);
     semanticWeb.innerHTML = impressions.toString();
     return false;
+}
+
+//https://community.openai.com/t/communicating-with-the-api-in-vanilla-js-no-server-side-stuff/4984/6
+async function OpenaiFetchAPI(in1) {
+    var impression = document.getElementById("impression1").value;
+    console.log("Calling 3mbedding")
+    var url = "https://api.openai.com/v1/embeddings"
+    var bearer = 'Bearer ' + MY_TOKEN;
+    var response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': bearer,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "input": in1,
+            "model":"text-embedding-ada-002"
+        })
+    })
+    var datav1  = await response.json();
+    console.log(datav1.data[0].embedding)
+    return datav1.data[0].embedding;
+}
+
+//https://community.openai.com/t/communicating-with-the-api-in-vanilla-js-no-server-side-stuff/4984/6
+async function DirectFetch() {
+    var impression = document.getElementById("impression1").value;
+    console.log("Calling 3mbedding")
+    var url = "https://api.openai.com/v1/embeddings"
+    var bearer = 'Bearer ' + MY_TOKEN;
+    var response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': bearer,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "input": impression,
+            "model":"text-embedding-ada-002"
+        })
+    })
+    var datav1  = await response.json();
+    console.log(datav1.data[0].embedding)
+    var logit= datav1.data[0].embedding;
+
+    var x=Math.floor(Math.random() * logit[0]);
+    var y=Math.floor(Math.random() * logit[0]);
+    impressionh = "<div class=\"semance\" style=\"position: absolute;top:"+x+"%;left: "+y+"%;color:red;\">" + impression + "</div>";
+    impressions.push(impressionh);
+    console.log(impressions);
+    semanticWeb.innerHTML = impressions.toString();
 }
