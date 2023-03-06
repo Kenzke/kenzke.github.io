@@ -9,8 +9,6 @@ var impressions = [];
 var impressions_html = [];
 var impressions_pos = [];
 var Impression_Counter = 0;
-
-
 var MY_TOKEN= "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";
 
 
@@ -75,15 +73,7 @@ left.onclick = function(){
     }
 }
 
-let model = new TSNE({
-  dim: 2,
-  perplexity: 30.0,
-  earlyExaggeration: 4.0,
-  learningRate: 100.0,
-  nIter: 1000,
-  metric: 'euclidean'
-});
-
+// git stash apply -> um code wieder zu bekommen
 //https://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf?fbcl
 //https://github.com/scienceai/tsne-js
 function pushImpression(){
@@ -97,10 +87,14 @@ function pushImpression(){
     var prev_x=0;
     var prev_y=0;
 
+
     if(Impression_Counter<2){
         
     }else{
         var i = Impression_Counter-2;
+        console.log("whatamidoinghere:"+impressions_pos[i])
+        //var xy = PCA.getEigenVectors(impressions_pos[i]);
+        //console.log('xy: '+xy)
         var prev_x=(impressions_pos[i][0]*1000)+50;
         var prev_y=(impressions_pos[i][1]*1000)+50;
     }
@@ -108,10 +102,10 @@ function pushImpression(){
     console.log("x: "+x+",y: "+y);
     console.log("prev_x: "+prev_x+",prev_y: "+prev_y);
 
-
-    var curr_impression_html = "<div class=\"semance\" style=\"position: absolute;top:"+x+"%;left: "+y+"%;color:red;\">" + impression + "</div>";
+    var i = Impression_Counter-2;
+    var curr_impression_html = "<div class=\"semance\" style=\"position: absolute;top:"+x+"%;left: "+y+"%;color:red;\">" + impression + "</div><div class=\"semance\" style=\"font-size: 0.15em;position: absolute;top:"+x+"%;left: "+y+"%;color:red;\">" + impressions_pos[i] + "</div>";
     if(Impression_Counter>1){
-        impressions_html[Impression_Counter-2]="<div class=\"semance\" style=\"position: absolute;top:"+prev_x+"%;left: "+prev_y+"%;color:red;\">" + impressions[impressions.length-2] + "</div>";
+        impressions_html[Impression_Counter-2]="<div class=\"semance\" style=\"position: absolute;top:"+prev_x+"%;left: "+prev_y+"%;color:red;\">" + impressions[i] + "</div></div><div class=\"semance\" style=\"font-size: 0.15em;position: absolute;top:"+prev_x+"%;left: "+prev_y+"%;color:red;\">" + impressions_pos[i] + "</div>";
     }
     impressions_html.push(curr_impression_html);
 
@@ -174,4 +168,16 @@ async function DirectFetch() {
     impressions.push(impressionh);
     console.log(impressions);
     semanticWeb.innerHTML = impressions.toString();
+}
+
+
+
+function listToMatrix(list) {
+    var matrix = [];
+
+    for (i = 0; i < list.length; i++) {
+        matrix.push(list[i]);
+    }
+
+    return [matrix];
 }

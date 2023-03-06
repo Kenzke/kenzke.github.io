@@ -350,16 +350,17 @@ html, body{
     display:block;
     margin-bottom:0px;
 }
-
-.boxthird{
+.box2l{
     height:auto;
-    width:auto;
-    flex: 33.33%;
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
-    float:none;
-    margin-top:20px;
+    flex: 0 0  33%;
+}
+.box2m{
+    height:auto;
+    flex: 0 0  33%;
+}
+.box2r{
+    height:auto;
+    flex: 0 0  33%;
 }
 
 .boxwhole{
@@ -408,6 +409,7 @@ html, body{
     align-self: center;
     margin-left:25%;
     margin-right:25%;
+    text-align: justify;
 }
 
 .caption{
@@ -548,7 +550,7 @@ span {
     top: 50%;
     left: 50%;
     color:red;
-    font-size: 2em;
+    font-size: 2.4em;
 }
 
   
